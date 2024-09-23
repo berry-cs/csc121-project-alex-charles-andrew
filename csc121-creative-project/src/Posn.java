@@ -46,6 +46,11 @@ public class Posn {
     public Posn translate(Posn offset) {
         return new Posn( this.x + offset.x, this.y + offset.y );
     }
+    
+    /** creates a new posn */
+    public Posn RandPosn() {
+    	return new Posn((int)(Math.random() * (400)), (int)(Math.random() * (400)));
+    }
 
 
     @Override
