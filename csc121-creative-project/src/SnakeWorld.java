@@ -7,6 +7,7 @@
  */
 
 import processing.core.PApplet;
+import processing.event.KeyEvent;
 
 public class SnakeWorld implements IWorld {
 	Posn snake;
@@ -26,12 +27,40 @@ public class SnakeWorld implements IWorld {
 		c.noStroke();  // no outline
 		c.fill(255, 0, 0); // (R, G, B) = "red"
 		
-		c.circle(this.apple.getX(), this.apple.getY(), 10); // put a circle with diameter 10 at the Posn of the apple
-        c.rect(this.snake.getX(), this.snake.getY(), 30, 10); 
-        c.imageMode(c.CENTER);
+		c.circle(this.apple.getX(), this.apple.getY(), 20); // put a circle with diameter 10 at the Posn of the apple
+        c.rect(this.snake.getX(), this.snake.getY(), 60, 20, 28); 
+        c.rectMode(c.CENTER);
 		
 		return c;
 	}
+	
+	/** moves the snake in response to arrow keys */
+    public IWorld keyPressed(KeyEvent kev) {
+    	///    kev.getKey() == 'A'
+        if (kev.getKeyCode() == PApplet.UP) {
+            return new SnakeWorld(this.snake.translate(new Posn(0, -10)), this.apple);
+        } else if (kev.getKeyCode() == PApplet.DOWN) {
+            return new SnakeWorld(this.snake.translate(new Posn(0, 10)), this.apple);
+        } else if (kev.getKeyCode() == PApplet.LEFT) {
+            return new SnakeWorld(this.snake.translate(new Posn(-10, 0)), this.apple);
+        } else if (kev.getKeyCode() == PApplet.RIGHT) {
+            return new SnakeWorld(this.snake.translate(new Posn(10, 0)), this.apple);
+        } else {
+            return this;
+        }
+    }
+    
+    
+    /** moves the snake constantly in the direction given 
+    public IWorld update() {
+        if (this.snake.distanceTo(this.anchor) < 2 * this.BOUNCE_FACTOR ) {
+            return new BouncyWorld(this.anchor, this.anchor);  // snap to anchor
+        } else {
+            return new BouncyWorld(this.anchor,
+                                this.blob.translate( this.blob.diff(this.anchor).scale( 1.0 / this.BOUNCE_FACTOR )));
+        }
+    }
+	*/
 }
 
 
