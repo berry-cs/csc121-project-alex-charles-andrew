@@ -4,7 +4,7 @@ import processing.event.*;
 /**
  * Provides the scaffolding to launch a Processing application
  */
-public class SnakeApp extends PApplet {	// <----- 1. rename AppTemplate everywhere in this file
+public class BouncyApp extends PApplet {
     IWorld w;
     
     public void settings() {
@@ -12,8 +12,7 @@ public class SnakeApp extends PApplet {	// <----- 1. rename AppTemplate everywhe
     }
     
     public void setup() {
-        //w = new WORLD(..........)   	<----- 2. create your initial world object
-    	w = new SnakeWorld(new Posn(100, 200), new Posn(300, 200));
+    	w = new BouncyWorld(new Posn(50, 50), new Posn(100, 100));
     }
     
     public void draw() {
@@ -77,6 +76,6 @@ public class SnakeApp extends PApplet {	// <----- 1. rename AppTemplate everywhe
     }
 
     public static void main(String[] args) {
-        PApplet.runSketch(new String[] { SnakeApp.class.getName() }, new SnakeApp());
+        PApplet.runSketch(new String[] { BouncyApp.class.getName() }, new BouncyApp());
     }
 }
