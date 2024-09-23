@@ -26,7 +26,9 @@ public class SnakeWorld implements IWorld {
 		c.noStroke();  // no outline
 		c.fill(255, 0, 0); // (R, G, B) = "red"
 		
-		
+		c.circle(this.apple.getX(), this.apple.getY(), 10); // put a circle with diameter 10 at the Posn of the apple
+        c.rect(this.snake.getX(), this.snake.getY(), 30, 10); 
+        c.imageMode(c.CENTER);
 		
 		return c;
 	}
