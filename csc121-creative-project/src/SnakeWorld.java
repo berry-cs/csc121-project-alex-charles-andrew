@@ -28,8 +28,8 @@ public class SnakeWorld implements IWorld {
 		c.fill(255, 0, 0); // (R, G, B) = "red"
 		
 		c.circle(this.apple.getX(), this.apple.getY(), 20); // put a circle with diameter 10 at the Posn of the apple
-        c.rect(this.snake.getX(), this.snake.getY(), 60, 20, 28); 
-        c.rectMode(c.CENTER);
+        c.rect(this.snake.getX(), this.snake.getY(), -60, 20, 28); 
+        c.rectMode(c.CORNER);
 		
 		return c;
 	}
