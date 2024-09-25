@@ -40,4 +40,15 @@ class SnakeWordTest {
 
 	}
 
+	@Test
+	void testate() {
+		assertEquals(false, w1.snake.ate(new Posn (45, 90)));
+		assertEquals(true, w2.snake.ate(new Posn (170, 205)));
+		assertEquals(true, w3.snake.ate(new Posn (20, 10)));
+		assertEquals(false, w4.snake.ate(new Posn (50, 20)));
+		assertEquals(true, w5.snake.ate(new Posn (50, 30)));
+		assertEquals(false, w6.snake.ate(new Posn (10, 40)));
+	}
+	
+	
 }
