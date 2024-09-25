@@ -12,14 +12,16 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 public class SnakeWorld implements IWorld {
-	Posn snake;
+	Snake snake;
 	Posn apple;
-	int speed = 20;
+	int clock;
+	final int SPEED = 20;
 	
-	public SnakeWorld(Posn snake, Posn apple) {
+	public SnakeWorld(Snake snake, Posn apple, int clock) {
 		super();
 		this.snake = snake;
 		this.apple = apple;
+		this.clock = clock;
 	}
 	
 	/** produce an image of the state of this animation on given canvas */
@@ -31,12 +33,11 @@ public class SnakeWorld implements IWorld {
 		c.fill(255, 0, 0); // (R, G, B) = "red"
 		c.circle(this.apple.getX(), this.apple.getY(), 20); // put a circle with diameter 10 at the Posn of the apple
         
-		c.fill(0, 0, 255); // (R, G, B) = "blue"
-		c.rect(this.snake.getX(), this.snake.getY(), -60, 20, 28); 
-        c.rectMode(c.CORNER);
-        
-        c.fill(255, 255, 255);
-        c.circle((this.snake.getX() - 5), (this.snake.getY() + 5), 5);
+		this.snake.draw(c);
+		
+				//snake eye
+       // c.fill(255, 255, 255);
+        //c.circle((this.snake.getX() + 5), (this.snake.getY() - 2), 5);
 		
 		return c;
 	}
@@ -45,13 +46,13 @@ public class SnakeWorld implements IWorld {
     public IWorld keyPressed(KeyEvent kev) {
     	///    kev.getKey() == 'A'
         if (kev.getKeyCode() == PApplet.UP) {
-            return new SnakeWorld(this.snake.translate(new Posn(0, -20)), this.apple);
+            return new SnakeWorld(this.snake.changeDir(new Posn(0, -10)), this.apple, this.clock);
         } else if (kev.getKeyCode() == PApplet.DOWN) {
-            return new SnakeWorld(this.snake.translate(new Posn(0, 20)), this.apple);
+            return new SnakeWorld(this.snake.changeDir(new Posn(0, 10)), this.apple, this.clock);
         } else if (kev.getKeyCode() == PApplet.LEFT) {
-            return new SnakeWorld(this.snake.translate(new Posn(-20, 0)), this.apple);
+            return new SnakeWorld(this.snake.changeDir(new Posn(-10, 0)), this.apple, this.clock);
         } else if (kev.getKeyCode() == PApplet.RIGHT) {
-            return new SnakeWorld(this.snake.translate(new Posn(20, 0)), this.apple);
+            return new SnakeWorld(this.snake.changeDir(new Posn(10, 0)), this.apple, this.clock);
         } else {
             return this;
         }
@@ -60,17 +61,20 @@ public class SnakeWorld implements IWorld {
     
     /** moves the snake constantly in the direction given */
     public IWorld update() {
-        if (this.snake.equals(apple)) {
-            return new SnakeWorld(this.snake, this.apple.RandPosn());  // move the apple to a random Posn
+        if (this.snake.ate(apple)) {
+            return new SnakeWorld(this.snake, this.apple.RandPosn(), this.clock+1);  // move the apple to a random Posn
+        } else if (this.clock % this.SPEED == 0) {
+            return new SnakeWorld(this.snake.move(),
+                                this.apple, this.clock+1);
         } else {
-            return new SnakeWorld(this.snake,
-                                this.apple);
+        	return new SnakeWorld(this.snake,
+        					this.apple, this.clock+1);
         }
     }
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(apple, snake, speed);
+		return Objects.hash(apple, snake, clock);
 	}
 
 	@Override
