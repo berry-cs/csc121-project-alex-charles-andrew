@@ -74,7 +74,7 @@ public class SnakeWorld implements IWorld {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(apple, snake, clock);
+		return Objects.hash(SPEED, apple, clock, snake);
 	}
 
 	@Override
@@ -86,14 +86,16 @@ public class SnakeWorld implements IWorld {
 		if (getClass() != obj.getClass())
 			return false;
 		SnakeWorld other = (SnakeWorld) obj;
-		return Objects.equals(apple, other.apple) && Objects.equals(snake, other.snake) && speed == other.speed;
+		return SPEED == other.SPEED && Objects.equals(apple, other.apple) && clock == other.clock
+				&& Objects.equals(snake, other.snake);
 	}
 
 	@Override
 	public String toString() {
-		return "SnakeWorld [snake=" + snake + ", apple=" + apple + ", speed=" + speed + "]";
+		return "SnakeWorld [snake=" + snake + ", apple=" + apple + ", clock=" + clock + ", SPEED=" + SPEED + "]";
 	}
-     
+
+	
 	
 }
 

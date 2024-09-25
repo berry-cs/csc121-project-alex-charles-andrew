@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 import processing.core.PApplet;
 
 public class Snake {
@@ -35,6 +37,30 @@ public class Snake {
 	public boolean ate(Posn appleLoc) {
 		return this.head.equals(appleLoc);
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(curDir, head);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Snake other = (Snake) obj;
+		return Objects.equals(curDir, other.curDir) && Objects.equals(head, other.head);
+	}
+
+	@Override
+	public String toString() {
+		return "Snake [head=" + head + ", curDir=" + curDir + "]";
+	}
+	
+	
 	
 	
 }
