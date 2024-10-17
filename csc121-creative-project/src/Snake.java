@@ -2,7 +2,7 @@ import java.util.Objects;
 
 import processing.core.PApplet;
 
-public class Snake {
+public class Snake implements ISnake{
 	Posn head;
 	Posn curDir;
 

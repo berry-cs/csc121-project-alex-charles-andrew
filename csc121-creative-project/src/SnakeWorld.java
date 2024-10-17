@@ -12,12 +12,12 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 public class SnakeWorld implements IWorld {
-	Snake snake;
+	ISnake snake;
 	Posn apple;
 	int clock;
 	final int SPEED = 20;
 	
-	public SnakeWorld(Snake snake, Posn apple, int clock) {
+	public SnakeWorld(ISnake snake, Posn apple, int clock) {
 		super();
 		this.snake = snake;
 		this.apple = apple;
