@@ -24,11 +24,11 @@ class Body implements ISnake{
 	}
 	
 	public ISnake changeDir(Posn newDir) {
-		return new Body(this.pos, this.curDir, this.next.changeDir(newDir));
+		return new Body(this.pos, this.curDir, this.next); //////////////// HELP HERE
 	}
 	
 	public ISnake move() {
-		return new Body(pos.translate(this.curDir), this.curDir, this.next.move());
+		return new Body(pos.translate(this.curDir), this.curDir, this.next); /////////////// ALSO HELP HERE
 	}
 	
 	public ISnake grow(Posn newPos) {
