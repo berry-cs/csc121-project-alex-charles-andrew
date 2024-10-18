@@ -4,11 +4,13 @@ interface ISnake{
 	
 	public PApplet draw(PApplet c);
 	
-	public Snake changeDir(Posn newDir);
+	public ISnake changeDir(Posn newDir);
 	
-	public Snake move();
+	public ISnake move();
 	
 	public boolean ate(Posn appleLoc);
+	
+	public ISnake grow(Posn newPos);
 	
 
 }

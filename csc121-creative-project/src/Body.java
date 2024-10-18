@@ -1,31 +1,41 @@
 import processing.core.PApplet;
 
 class Body implements ISnake{
-	Snake body;
-
-	public Body(Snake body) {
-		super();
-		this.body = body;
-	}
+	Posn pos;
+	Posn curDir;
+	ISnake next;
 	
+	
+
+	public Body(Posn pos, Posn curDir, ISnake next) {
+		super();
+		this.pos = pos;
+		this.curDir = curDir;
+		this.next = next;
+	}
+
 	/** produce an image of this snake on given canvas */
 	public PApplet draw(PApplet c) {
 		c.fill(0, 0, 255); // (R, G, B) = "blue"
 		//c.circle(this.snake.getX(), this.snake.getY(), 20);
         c.rectMode(PApplet.CENTER);
-		c.rect(this.body.head.getX(), this.body.head.getY(), 20, 20);
+		c.rect(this.pos.getX(), this.pos.getY(), 20, 20);
 		return c; 
 	}
 	
-	public Snake changeDir(Posn newDir) {
-		return new Snake(this.body.head, newDir);
+	public ISnake changeDir(Posn newDir) {
+		return new Body(this.pos, this.curDir, this.next.changeDir(newDir));
 	}
 	
-	public Snake move() {
-		return new Snake(this.body.head.translate(this.body.curDir),  this.body.curDir);
+	public ISnake move() {
+		return new Body(pos.translate(this.curDir), this.curDir, this.next.move());
+	}
+	
+	public ISnake grow(Posn newPos) {
+		return new Body(this.pos, this.curDir, this.next); //////////////// HELP HERE. CANT GET SNAKE TO GROW
 	}
 	
 	public boolean ate(Posn appleLoc) {
-		return this.body.head.equals(appleLoc);
+		return this.pos.equals(appleLoc);
 	}
 }

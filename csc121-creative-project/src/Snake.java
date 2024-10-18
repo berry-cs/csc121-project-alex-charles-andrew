@@ -5,16 +5,21 @@ import processing.core.PApplet;
 public class Snake implements ISnake{
 	Posn head;
 	Posn curDir;
+	ISnake body;
+	
+	// Can't remember why we have 2 different constructors here?? Do we need both??
 
-	public Snake(Posn head) {
+	public Snake(Posn head, ISnake body) {
 		this.head = head;
 		this.curDir = new Posn(10, 0);
+		this.body = body;
 	}
 	
-	public Snake(Posn head, Posn curDir) {
+	public Snake(Posn head, Posn curDir, ISnake body) {
 		super();
 		this.head = head;
 		this.curDir = curDir;
+		this.body = body;
 	}
 
 	/** produce an image of this snake on given canvas */
@@ -27,15 +32,19 @@ public class Snake implements ISnake{
 	}
 
 	public Snake changeDir(Posn newDir) {
-		return new Snake(this.head, newDir);
+		return new Snake(this.head, newDir, this.body);
 	}
 	
-	public Snake move() {
-		return new Snake(this.head.translate(this.curDir),  this.curDir);
+	public ISnake move() {
+		return new Snake(this.head.translate(this.curDir),  this.curDir, this.body);
 	}
 	
 	public boolean ate(Posn appleLoc) {
 		return this.head.equals(appleLoc);
+	}
+	
+	public ISnake grow(Posn newPos) {
+		return new Snake(this.head, this.curDir, this.body.grow(this.head)); ///////////////////////////// HELP HERE??????
 	}
 
 	@Override
