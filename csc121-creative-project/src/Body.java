@@ -1,3 +1,5 @@
+/*
+
 import processing.core.PApplet;
 
 class Body implements ISnake{
@@ -14,7 +16,7 @@ class Body implements ISnake{
 		this.next = next;
 	}
 
-	/** produce an image of this snake on given canvas */
+	/** produce an image of this snake on given canvas 
 	public PApplet draw(PApplet c) {
 		c.fill(0, 0, 255); // (R, G, B) = "blue"
 		//c.circle(this.snake.getX(), this.snake.getY(), 20);
@@ -39,3 +41,5 @@ class Body implements ISnake{
 		return this.pos.equals(appleLoc);
 	}
 }
+
+*/

@@ -2,7 +2,48 @@ import java.util.Objects;
 
 import processing.core.PApplet;
 
-public class Snake implements ISnake{
+public class Snake {
+	
+	ILoP segments;
+	Posn curDir;
+	
+	public Snake(ILoP segments, Posn curDir) {
+		super();
+		this.segments = segments;
+		this.curDir = curDir;
+	}
+
+	public PApplet draw(PApplet c) {
+		c.fill(0, 0, 255); // (R, G, B) = "blue"
+		//c.circle(this.snake.getX(), this.snake.getY(), 20);
+        
+		segments.draw(c);
+		return c; 
+	}
+	
+	public Snake changeDir(Posn newDir) {
+		return new Snake(this.segments, newDir);
+	}
+	
+	public Snake move() {
+		return new Snake(new Consp( segments.getFirst().translate(curDir), segments).dropLast()  , curDir);
+	}
+
+	public Snake grow() {
+		return new Snake(new Consp( segments.getFirst().translate(curDir), segments) , curDir);
+	}
+
+	
+	public boolean ate(Posn appleLoc) {
+		return false;
+	}
+	
+}
+
+
+/*
+ * public class Snake implements ISnake{
+ 
 	Posn head;
 	Posn curDir;
 	ISnake body;
@@ -22,7 +63,7 @@ public class Snake implements ISnake{
 		this.body = body;
 	}
 
-	/** produce an image of this snake on given canvas */
+	/** produce an image of this snake on given canvas 
 	public PApplet draw(PApplet c) {
 		c.fill(0, 0, 255); // (R, G, B) = "blue"
 		//c.circle(this.snake.getX(), this.snake.getY(), 20);
@@ -74,7 +115,7 @@ public class Snake implements ISnake{
 	
 }
 
-/*
+
 hitting arrow keys should change the snake's direction, not actually move at that point
 
 
@@ -88,3 +129,5 @@ list of segments
 
 
 */
+
+

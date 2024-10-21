@@ -6,11 +6,11 @@ interface ISnake{
 	
 	public ISnake changeDir(Posn newDir);
 	
-	public ISnake move();
+	//public ISnake move();
 	
-	public boolean ate(Posn appleLoc);
+	//public boolean ate(Posn appleLoc);
 	
-	public ISnake grow(Posn newPos);
+	//public ISnake grow(Posn newPos);
 	
 
 }

@@ -12,12 +12,12 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 public class SnakeWorld implements IWorld {
-	ISnake snake;
+	Snake snake;
 	Posn apple;
 	int clock;
 	final int SPEED = 20;
 	
-	public SnakeWorld(ISnake snake, Posn apple, int clock) {
+	public SnakeWorld(Snake snake, Posn apple, int clock) {
 		super();
 		this.snake = snake;
 		this.apple = apple;
@@ -46,13 +46,13 @@ public class SnakeWorld implements IWorld {
     public IWorld keyPressed(KeyEvent kev) {
     	///    kev.getKey() == 'A'
         if (kev.getKeyCode() == PApplet.UP) {
-            return new SnakeWorld(this.snake.changeDir(new Posn(0, -10)), this.apple, this.clock);
+            return new SnakeWorld(this.snake.changeDir(new Posn(0, -20)), this.apple, this.clock);
         } else if (kev.getKeyCode() == PApplet.DOWN) {
-            return new SnakeWorld(this.snake.changeDir(new Posn(0, 10)), this.apple, this.clock);
+            return new SnakeWorld(this.snake.changeDir(new Posn(0, 20)), this.apple, this.clock);
         } else if (kev.getKeyCode() == PApplet.LEFT) {
-            return new SnakeWorld(this.snake.changeDir(new Posn(-10, 0)), this.apple, this.clock);
+            return new SnakeWorld(this.snake.changeDir(new Posn(-20, 0)), this.apple, this.clock);
         } else if (kev.getKeyCode() == PApplet.RIGHT) {
-            return new SnakeWorld(this.snake.changeDir(new Posn(10, 0)), this.apple, this.clock);
+            return new SnakeWorld(this.snake.changeDir(new Posn(20, 0)), this.apple, this.clock);
         } else {
             return this;
         }
@@ -62,7 +62,7 @@ public class SnakeWorld implements IWorld {
     /** moves the snake constantly in the direction given */
     public IWorld update() {
         if (this.snake.ate(apple)) {
-            return new SnakeWorld(this.snake, this.apple.RandPosn(), this.clock+1);  // move the apple to a random Posn
+            return new SnakeWorld(this.snake.grow(), this.apple.RandPosn(), this.clock+1);  // move the apple to a random Posn
         } else if (this.clock % this.SPEED == 0) {
             return new SnakeWorld(this.snake.move(),
                                 this.apple, this.clock+1);
