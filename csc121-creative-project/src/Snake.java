@@ -35,7 +35,7 @@ public class Snake {
 
 	
 	public boolean ate(Posn appleLoc) {
-		return false;
+		return this.segments.getFirst().equals(appleLoc);
 	}
 	
 }
