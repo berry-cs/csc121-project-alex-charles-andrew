@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 import processing.core.PApplet;
 
 public interface ILoP {
@@ -16,6 +18,8 @@ public interface ILoP {
 
 
 class MTp implements ILoP {
+	
+
 
 	@Override
 	public PApplet draw(PApplet c) {
@@ -38,6 +42,8 @@ class MTp implements ILoP {
 	public boolean isEmpty() {
 		return true;
 	}
+	
+	
 	
 }
 
@@ -76,5 +82,29 @@ class Consp implements ILoP {
 	public boolean isEmpty() {
 		return false;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(first, rest);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Consp other = (Consp) obj;
+		return Objects.equals(first, other.first) && Objects.equals(rest, other.rest);
+	}
+
+	@Override
+	public String toString() {
+		return "Consp [first=" + first + ", rest=" + rest + "]";
+	}
+	
+	
 	
 }
