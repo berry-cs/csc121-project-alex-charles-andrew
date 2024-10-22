@@ -37,6 +37,30 @@ public class Snake {
 	public boolean ate(Posn appleLoc) {
 		return this.segments.getFirst().equals(appleLoc);
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(curDir, segments);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Snake other = (Snake) obj;
+		return Objects.equals(curDir, other.curDir) && Objects.equals(segments, other.segments);
+	}
+
+	@Override
+	public String toString() {
+		return "Snake [segments=" + segments + ", curDir=" + curDir + "]";
+	}
+	
+	
 	
 }
 
