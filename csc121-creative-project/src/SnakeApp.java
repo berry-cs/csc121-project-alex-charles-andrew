@@ -7,13 +7,21 @@ import processing.event.*;
 public class SnakeApp extends PApplet {	// <----- 1. rename AppTemplate everywhere in this file
     IWorld w;
     
+    public static final Posn StartingPosnHead = new Posn(180, 200);
+    public static final Posn StartingPosnBody = new Posn(160, 200);
+    public static final Posn StartingDir = new Posn(20, 0);
+    public static final Posn StartingPosnApple = new Posn(300, 200);
+    public static final int StartingClock = 0;
+    
+    
+    
     public void settings() {
         this.size(400, 400);
     }
     
     public void setup() {
         //w = new WORLD(..........)   	<----- 2. create your initial world object
-    	w = new SnakeWorld(new Snake(new Consp(new Posn(180, 200), new Consp(new Posn(160, 200), new MTp())), new Posn(20, 0)), new Posn(300, 200), 0);
+    	w = new SnakeWorld(new Snake(new Consp(StartingPosnHead, new Consp(StartingPosnBody, new MTp())), StartingDir), StartingPosnApple, StartingClock);
     }
     
     public void draw() {
