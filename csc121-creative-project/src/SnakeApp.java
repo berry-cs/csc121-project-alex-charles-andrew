@@ -12,11 +12,13 @@ public class SnakeApp extends PApplet {	// <----- 1. rename AppTemplate everywhe
     public static final Posn StartingDir = new Posn(20, 0);
     public static final Posn StartingPosnApple = new Posn(300, 200);
     public static final int StartingClock = 0;
+    public static final int Width = 400;
+    public static final int Height = 400;
     
     
     
     public void settings() {
-        this.size(400, 400);
+        this.size(Width, Height);
     }
     
     public void setup() {
