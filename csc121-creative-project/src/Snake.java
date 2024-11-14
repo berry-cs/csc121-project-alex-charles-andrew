@@ -7,6 +7,8 @@ public class Snake {
 	ILoP segments;
 	Posn curDir;
 	
+	public static final int SnakeOB = 380;
+	
 	public Snake(ILoP segments, Posn curDir) {
 		super();
 		this.segments = segments;
@@ -26,7 +28,11 @@ public class Snake {
 	}
 	
 	public Snake move() {
+		if (this.outOfBounds()) {
+			return this;
+		} else {
 		return new Snake(new Consp( segments.getFirst().translate(curDir), segments).dropLast()  , curDir);
+		}
 	}
 
 	public Snake grow() {
@@ -37,6 +43,14 @@ public class Snake {
 	public boolean ate(Posn appleLoc) {
 		return this.segments.getFirst().equals(appleLoc);
 	}
+	
+	public boolean outOfBounds() {
+		return this.segments.getFirst().getX() < 0 || 
+				this.segments.getFirst().getY() < 0 ||
+				this.segments.getFirst().getX() > SnakeOB ||
+				this.segments.getFirst().getY() > SnakeOB ;
+	}
+	
 
 	@Override
 	public int hashCode() {
