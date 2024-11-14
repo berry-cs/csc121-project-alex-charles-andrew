@@ -7,6 +7,7 @@ public class Snake {
 	ILoP segments;
 	Posn curDir;
 	
+	
 	public static final int SnakeOB = 380;
 	
 	public Snake(ILoP segments, Posn curDir) {
@@ -50,6 +51,7 @@ public class Snake {
 				this.segments.getFirst().getX() > SnakeOB ||
 				this.segments.getFirst().getY() > SnakeOB ;
 	}
+	
 	
 
 	@Override

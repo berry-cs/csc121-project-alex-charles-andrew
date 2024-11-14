@@ -16,12 +16,14 @@ public class SnakeWorld implements IWorld {
 	Posn apple;
 	int clock;
 	final int SPEED = 20;
+	int score = 0;
 	
-	public SnakeWorld(Snake snake, Posn apple, int clock) {
+	public SnakeWorld(Snake snake, Posn apple, int clock, int score) {
 		super();
 		this.snake = snake;
 		this.apple = apple;
 		this.clock = clock;
+		this.score = score;
 	}
 	
 	/** produce an image of the state of this animation on given canvas */
@@ -39,6 +41,17 @@ public class SnakeWorld implements IWorld {
        // c.fill(255, 255, 255);
         //c.circle((this.snake.getX() + 5), (this.snake.getY() - 2), 5);
 		
+		if (this.snake.outOfBounds()) {
+			c.fill(0, 0, 0);
+			c.textSize(50);
+			c.textAlign(PApplet.CENTER, PApplet.CENTER);
+			c.text("Game Over!", c.width / 2, c.height / 2 - 50);
+			
+			c.textSize(40);
+			c.text("Your Score: " + score, c.width / 2, c.height / 2);
+			c.text("High Score: " + score, c.width / 2, c.height / 2 + 50);
+		}
+		
 		return c;
 	}
 	
@@ -46,13 +59,13 @@ public class SnakeWorld implements IWorld {
     public IWorld keyPressed(KeyEvent kev) {
     	///    kev.getKey() == 'A'
         if (kev.getKeyCode() == PApplet.UP) {
-            return new SnakeWorld(this.snake.changeDir(new Posn(0, -20)), this.apple, this.clock);
+            return new SnakeWorld(this.snake.changeDir(new Posn(0, -20)), this.apple, this.clock, this.score);
         } else if (kev.getKeyCode() == PApplet.DOWN) {
-            return new SnakeWorld(this.snake.changeDir(new Posn(0, 20)), this.apple, this.clock);
+            return new SnakeWorld(this.snake.changeDir(new Posn(0, 20)), this.apple, this.clock, this.score);
         } else if (kev.getKeyCode() == PApplet.LEFT) {
-            return new SnakeWorld(this.snake.changeDir(new Posn(-20, 0)), this.apple, this.clock);
+            return new SnakeWorld(this.snake.changeDir(new Posn(-20, 0)), this.apple, this.clock, this.score);
         } else if (kev.getKeyCode() == PApplet.RIGHT) {
-            return new SnakeWorld(this.snake.changeDir(new Posn(20, 0)), this.apple, this.clock);
+            return new SnakeWorld(this.snake.changeDir(new Posn(20, 0)), this.apple, this.clock, this.score);
         } else {
             return this;
         }
@@ -61,14 +74,15 @@ public class SnakeWorld implements IWorld {
     
     /** moves the snake constantly in the direction given */
     public IWorld update() {
-        if (this.snake.ate(apple)) {
-            return new SnakeWorld(this.snake.grow(), this.apple.RandPosn(), this.clock+1);  // move the apple to a random Posn
+    	if (this.snake.ate(apple)) {
+        	score = score + 1;
+            return new SnakeWorld(this.snake.grow(), this.apple.RandPosn(), this.clock+1, this.score);  // move the apple to a random Posn
         } else if (this.clock % this.SPEED == 0) {
             return new SnakeWorld(this.snake.move(),
-                                this.apple, this.clock+1);
+                                this.apple, this.clock+1, this.score);
         } else {
         	return new SnakeWorld(this.snake,
-        					this.apple, this.clock+1);
+        					this.apple, this.clock+1, this.score);
         }
     }
 

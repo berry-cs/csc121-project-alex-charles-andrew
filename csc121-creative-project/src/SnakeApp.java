@@ -12,6 +12,7 @@ public class SnakeApp extends PApplet {	// <----- 1. rename AppTemplate everywhe
     public static final Posn StartingDir = new Posn(20, 0);
     public static final Posn StartingPosnApple = new Posn(300, 200);
     public static final int StartingClock = 0;
+    public static final int StartingScore = 0;
     public static final int Width = 400;
     public static final int Height = 400;
     
@@ -23,7 +24,7 @@ public class SnakeApp extends PApplet {	// <----- 1. rename AppTemplate everywhe
     
     public void setup() {
         //w = new WORLD(..........)   	<----- 2. create your initial world object
-    	w = new SnakeWorld(new Snake(new Consp(StartingPosnHead, new Consp(StartingPosnBody, new MTp())), StartingDir), StartingPosnApple, StartingClock);
+    	w = new SnakeWorld(new Snake(new Consp(StartingPosnHead, new Consp(StartingPosnBody, new MTp())), StartingDir), StartingPosnApple, StartingClock, StartingScore);
     }
     
     public void draw() {
