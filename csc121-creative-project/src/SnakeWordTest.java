@@ -23,10 +23,10 @@ class SnakeWordTest {
 	 
 	//new SnakeWorld(new Posn (300, 190), new Posn(300, 200));
 
-	SnakeWorld w1 = new SnakeWorld(new Snake(new Consp(new Posn(180, 200), new Consp(new Posn(175, 195), new MTp())), new Posn(20, 0)), new Posn(300, 200), 0);
-	SnakeWorld w2 = new SnakeWorld(new Snake(new Consp(new Posn(160, 180), new Consp(new Posn(155, 175), new MTp())), new Posn(30, 0)), new Posn(290, 190), 0);
-	SnakeWorld w3 = new SnakeWorld(new Snake(new Consp(new Posn(140, 160), new Consp(new Posn(135, 155), new MTp())), new Posn(40, 0)), new Posn(280, 180), 0);
-	SnakeWorld w4 = new SnakeWorld(new Snake(new Consp(new Posn(120, 140), new Consp(new Posn(115, 135), new MTp())), new Posn(10, 0)), new Posn(270, 170), 0);
+	SnakeWorld w1 = new SnakeWorld(new Snake(new Consp(new Posn(180, 200), new Consp(new Posn(175, 195), new MTp())), new Posn(20, 0)), new Posn(300, 200), 0, 0);
+	SnakeWorld w2 = new SnakeWorld(new Snake(new Consp(new Posn(160, 180), new Consp(new Posn(155, 175), new MTp())), new Posn(30, 0)), new Posn(290, 190), 0, 0);
+	SnakeWorld w3 = new SnakeWorld(new Snake(new Consp(new Posn(140, 160), new Consp(new Posn(135, 155), new MTp())), new Posn(40, 0)), new Posn(280, 180), 0, 0);
+	SnakeWorld w4 = new SnakeWorld(new Snake(new Consp(new Posn(120, 140), new Consp(new Posn(115, 135), new MTp())), new Posn(10, 0)), new Posn(270, 170), 0, 0);
 
 
 
