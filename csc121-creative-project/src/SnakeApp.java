@@ -1,4 +1,6 @@
 import processing.core.*;
+import java.util.Scanner;
+import java.io.*;
 import processing.event.*;
 
 /**
@@ -16,6 +18,7 @@ public class SnakeApp extends PApplet {	// <----- 1. rename AppTemplate everywhe
     public static final int Width = 400;
     public static final int Height = 400;
     
+    public static final IWorld StartSnakeWorld = new SnakeWorld(new Snake(new Consp(StartingPosnHead, new Consp(StartingPosnBody, new MTp())), StartingDir), StartingPosnApple, StartingClock, StartingScore);
     
     
     public void settings() {
@@ -24,7 +27,7 @@ public class SnakeApp extends PApplet {	// <----- 1. rename AppTemplate everywhe
     
     public void setup() {
         //w = new WORLD(..........)   	<----- 2. create your initial world object
-    	w = new SnakeWorld(new Snake(new Consp(StartingPosnHead, new Consp(StartingPosnBody, new MTp())), StartingDir), StartingPosnApple, StartingClock, StartingScore);
+    	w = StartSnakeWorld;
     }
     
     public void draw() {
@@ -89,5 +92,9 @@ public class SnakeApp extends PApplet {	// <----- 1. rename AppTemplate everywhe
 
     public static void main(String[] args) {
         PApplet.runSketch(new String[] { SnakeApp.class.getName() }, new SnakeApp());
+        
     }
+    
+    
+    	
 }

@@ -48,7 +48,7 @@ public class Snake {
 	public boolean outOfBounds() {
 		return this.segments.getFirst().getX() < 0 || 
 				this.segments.getFirst().getY() < 0 ||
-				this.segments.getFirst().getX() > SnakeOB ||
+				this.segments.getFirst().getX() > SnakeApp.Width - 20 ||
 				this.segments.getFirst().getY() > SnakeOB ;
 	}
 	
