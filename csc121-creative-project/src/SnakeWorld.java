@@ -34,6 +34,11 @@ public class SnakeWorld implements IWorld {
 		
 		c.fill(255, 0, 0); // (R, G, B) = "red"
 		c.circle(this.apple.getX(), this.apple.getY(), 20); // put a circle with diameter 10 at the Posn of the apple
+		
+		c.fill(0, 0, 0);
+		c.textSize(15);
+		c.textAlign(PApplet.CENTER, PApplet.CENTER);
+		c.text("Your Score: " + this.score, c.width / 8, c.height / 20);
         
 		this.snake.draw(c);
 		
@@ -67,7 +72,7 @@ public class SnakeWorld implements IWorld {
     	if (this.snake.outOfBounds()) {
     		return new GameOverWorld(this);
     	} else if (this.snake.ate(apple)) {
-        	score = score + 10;
+        	score = score + 1;
             return new SnakeWorld(this.snake.grow(), this.apple.RandPosn(), this.clock+1, this.score);  // move the apple to a random Posn
         } else if (this.clock % this.SPEED == 0) {
             return new SnakeWorld(this.snake.move(),
