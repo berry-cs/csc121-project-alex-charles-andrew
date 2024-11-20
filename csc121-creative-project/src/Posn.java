@@ -49,7 +49,7 @@ public class Posn {
     
     /** creates a new posn */
     public Posn RandPosn() {
-    	return new Posn(20 * (int)(Math.random() * (20)), 20 * (int)(Math.random() * (20)));
+    	return new Posn(20 + 20 * (int)(Math.random() * (19)), 20 + 20 * (int)(Math.random() * (19)));
     }
 
 

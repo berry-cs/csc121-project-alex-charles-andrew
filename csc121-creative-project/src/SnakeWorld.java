@@ -29,8 +29,13 @@ public class SnakeWorld implements IWorld {
 	/** produce an image of the state of this animation on given canvas */
 	public PApplet draw(PApplet c) {
 		c.background(160, 190, 100); // clear the screen each time (color white)
-		c.stroke(0);   // color black outline
-		c.noStroke();  // no outline
+		c.stroke(100,100,100);
+		c.strokeWeight(10);
+		c.noFill();
+		c.rect(200, 200, c.width - 10, c.height - 10);
+		
+		c.noStroke();
+		
 		
 		c.fill(255, 0, 0); // (R, G, B) = "red"
 		c.circle(this.apple.getX(), this.apple.getY(), 20); // put a circle with diameter 10 at the Posn of the apple
@@ -38,7 +43,7 @@ public class SnakeWorld implements IWorld {
 		c.fill(0, 0, 0);
 		c.textSize(15);
 		c.textAlign(PApplet.CENTER, PApplet.CENTER);
-		c.text("Your Score: " + this.score, c.width / 8, c.height / 20);
+		c.text("Your Score: " + this.score, c.width / 7, c.height / 20);
         
 		this.snake.draw(c);
 		
