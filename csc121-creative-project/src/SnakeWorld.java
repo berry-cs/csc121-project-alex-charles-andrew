@@ -12,11 +12,11 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 public class SnakeWorld implements IWorld {
-	Snake snake;
-	Posn apple;
-	int clock;
-	final int SPEED = 20;
-	int score = 0;
+	private Snake snake;
+	private Posn apple;
+	private int clock;
+	private final int SPEED = 20;
+	 int score = 0;
 	
 	public SnakeWorld(Snake snake, Posn apple, int clock, int score) {
 		super();
@@ -46,10 +46,6 @@ public class SnakeWorld implements IWorld {
 		c.text("Your Score: " + this.score, c.width / 7, c.height / 20);
         
 		this.snake.draw(c);
-		
-				//snake eye
-       // c.fill(255, 255, 255);
-        //c.circle((this.snake.getX() + 5), (this.snake.getY() - 2), 5);
 		
 		
 		return c;

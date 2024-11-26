@@ -4,14 +4,19 @@ import processing.core.PApplet;
 
 public interface ILoP {
 
+	
+	// this method draws the ListOfPosns
 	PApplet draw(PApplet c);
 
+	
+	// This method gets the first of a list of Posns
 	Posn getFirst();
 	
 	// produce a copy of *this* list with the
 	//  last posn removed
 	ILoP dropLast();
 	
+	// return true for MTp, False for Consp
 	boolean isEmpty();
 
 }
@@ -44,13 +49,23 @@ class MTp implements ILoP {
 	}
 	
 	
+	@Override
+	public boolean equals(Object obj) {
+	    return obj instanceof MTp;
+	}
+
+	@Override
+	public int hashCode() {
+	    return Objects.hash(MTp.class);
+	}
+	
 	
 }
 
 
 class Consp implements ILoP {
-	Posn first;
-	ILoP rest;
+	private Posn first;
+	private ILoP rest;
 	
 	public Consp(Posn first, ILoP rest) {
 		super();
@@ -58,6 +73,8 @@ class Consp implements ILoP {
 		this.rest = rest;
 	}
 
+	
+	
 	@Override
 	public PApplet draw(PApplet c) {
 		c.rectMode(PApplet.CENTER);
@@ -66,11 +83,14 @@ class Consp implements ILoP {
 		return c;
 	}
 
+	
+	
 	@Override
 	public Posn getFirst() {
 		return this.first;
 	}
 
+	
 	public ILoP dropLast() {
 		if (rest.isEmpty()) {
 			return rest;
@@ -79,14 +99,20 @@ class Consp implements ILoP {
 		}
 	}
 
+	
+	
 	public boolean isEmpty() {
 		return false;
 	}
+
+
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(first, rest);
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -100,10 +126,14 @@ class Consp implements ILoP {
 		return Objects.equals(first, other.first) && Objects.equals(rest, other.rest);
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Consp [first=" + first + ", rest=" + rest + "]";
 	}
+
+	
 	
 	
 	

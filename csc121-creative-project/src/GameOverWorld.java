@@ -9,9 +9,9 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 public class GameOverWorld implements IWorld {
-	SnakeWorld sw;
-	int highScore;
-	String highScoreName;
+	private SnakeWorld sw;
+	private int highScore;
+	private String highScoreName;
 
 	GameOverWorld(SnakeWorld sw) {
 		this.sw = sw;

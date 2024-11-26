@@ -3,8 +3,8 @@ import java.util.Objects;
 import processing.core.PApplet;
 
 public class Posn {
-    int x;
-    int y;
+    private int x;
+    private int y;
     
     public Posn(int x, int y) {
         this.x = x;

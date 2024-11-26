@@ -6,98 +6,80 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 class SnakeWordTest {
-	
-
-	//SnakeWorld w1 =  new SnakeWorld(new Snake (new Posn (180, 210), new Posn (250, 180)), new Posn (-10, 0), 12);
-	//SnakeWorld w2 = new SnakeWorld(new Snake (new Posn (170, 205), new Posn (190, 220)), new Posn (0, 10), 20);
-	//SnakeWorld w3 = new SnakeWorld(new Posn (280, 190), new Posn(300, 200));
-	//SnakeWorld w4 = new SnakeWorld(new Posn (300, 190), new Posn(300, 200));
-
-	//SnakeWorld w1 = new SnakeWorld(new Posn (160, 190), new Posn(300, 200));
-	//SnakeWorld w2 = new SnakeWorld(new Posn (180, 190), new Posn(300, 200));
-	//SnakeWorld w3 = new SnakeWorld(new Snake(new Posn (20, 10), new Posn (10, 0)), new Posn(5, 10), 5);
-	//SnakeWorld w4 = new SnakeWorld(new Snake(new Posn (40, 20), new Posn (0, -10)), new Posn(10, 15), 10);
-	//SnakeWorld w5 = new SnakeWorld(new Snake(new Posn (50, 30), new Posn (-10, 0)), new Posn(20, 10), 8);
-	//SnakeWorld w6 = new SnakeWorld(new Snake(new Posn (40, 10), new Posn (0, 10)), new Posn(10, 30), 15);
-			//new SnakeWorld(new Posn (280, 190), new Posn(300, 200));
-	 
-	//new SnakeWorld(new Posn (300, 190), new Posn(300, 200));
 
 	SnakeWorld w1 = new SnakeWorld(new Snake(new Consp(new Posn(180, 200), new Consp(new Posn(175, 195), new MTp())), new Posn(20, 0)), new Posn(300, 200), 0, 0);
 	SnakeWorld w2 = new SnakeWorld(new Snake(new Consp(new Posn(160, 180), new Consp(new Posn(155, 175), new MTp())), new Posn(30, 0)), new Posn(290, 190), 0, 0);
 	SnakeWorld w3 = new SnakeWorld(new Snake(new Consp(new Posn(140, 160), new Consp(new Posn(135, 155), new MTp())), new Posn(40, 0)), new Posn(280, 180), 0, 0);
 	SnakeWorld w4 = new SnakeWorld(new Snake(new Consp(new Posn(120, 140), new Consp(new Posn(115, 135), new MTp())), new Posn(10, 0)), new Posn(270, 170), 0, 0);
 
-
-
-
-
-
-
+	ILoP L1 = new Consp (new Posn(1, 2), new MTp());
+	ILoP L2 = new MTp();
+	ILoP L3 = new Consp (new Posn(21, 2), L1);
+	ILoP L4 = new Consp (new Posn(41, 2), L3);
+	
+	Snake S1 = new Snake(L1, new Posn(20,0));
+	Snake S2 = new Snake(L2, new Posn(-20,0));
+	Snake S3 = new Snake(L3, new Posn(0,20));
+	Snake S4 = new Snake(L4, new Posn(0,-20));
 
 
 	@Test
 	void testgetFirst() {
 		
-		assertEquals(new Posn(1, 2), new Consp(new Posn(1, 2), new MTp()).getFirst());
-		//assertEquals("can't get first of empty list", new MTp().getFirst());
-		
+		assertEquals(new Posn(1, 2), L1.getFirst());
+		assertEquals(new Posn(21, 2), L3.getFirst());
+		assertEquals(new Posn(41, 2), L4.getFirst());
 	}
+	
 	
 	@Test
 	void testdropLast() {
 		
-		assertEquals(null, new MTp().dropLast());
-		//assertEquals(new MTp(), new Consp(new Posn(1, 2), new MTp()).dropLast());   
-		/*
-		 * We are getting an error with this test case that seems to have something to do with the MTp. 
-		 * We expect this test above to return MTp() but the hash code does not align and it gives an error. 
-		 */
+		assertEquals(new MTp(), L1.dropLast());
+		assertEquals(null, L2.dropLast());
+		assertEquals(new Consp (new Posn(21, 2), new MTp()), L3.dropLast());
+		assertEquals(new Consp(new Posn(41, 2), new Consp( new Posn(21, 2), new MTp())), L4.dropLast());
 	}
 	
 	@Test
 	void testisEmpty() {
 		
 		assertEquals(true, new MTp().isEmpty());	
-		assertEquals(false, new Consp(new Posn(1, 2), new MTp()).isEmpty());	
+		assertEquals(false, L1.isEmpty());	
+		assertEquals(false, L4.isEmpty());	
 	}
 	
 	@Test
 	void testchangeDir() {
 		
-		//assertEquals(new Snake(new Consp(new Posn(0, 0), new Consp(new Posn(0, 1), new MTp())), new Posn(0,20)), new Snake(new Consp(new Posn(0, 0), new Consp(new Posn(0, 1), new MTp())), new Posn(20,0)).changeDir(new Posn(0,20)));
-		/*
-		 * We are getting the same error with the MTp class where the hash code is making the test fail
-		 */
+		assertEquals(new Snake(L1, new Posn(0,20)), S1.changeDir(new Posn(0,20)));
+		assertEquals(new Snake(L2, new Posn(0,-20)), S2.changeDir(new Posn(0,-20)));
+		assertEquals(new Snake(L3, new Posn(20, 0)), S3.changeDir(new Posn(20, 0)));
+		
 	}
 
 	@Test
 	void testate() {
 		
-		assertEquals(false , new Snake(new Consp(new Posn(0, 0), new Consp(new Posn(0, 1), new MTp())), new Posn(20,0)).ate(new Posn (20, 15)));
-		assertEquals(true , new Snake(new Consp(new Posn(0, 0), new Consp(new Posn(0, 1), new MTp())), new Posn(20,0)).ate(new Posn (0, 0)));
+		assertEquals(false , S1.ate(new Posn (20, 15)));
+		assertEquals(true , S3.ate(new Posn (21, 2)));
+		assertEquals(true , S4.ate(new Posn (41, 2)));
 
 	}
 	
 	@Test
 	void testgrow() {
 		
-	//	assertEquals(new Snake(new Consp(new Posn(20, 0), (new Consp(new Posn(0, 0), new Consp(new Posn(0, 1), new MTp())))), new Posn(20,0)),new Snake(new Consp(new Posn(0, 0), new Consp(new Posn(0, 1), new MTp())), new Posn(20,0)).grow());
-		/*
-		 * We are getting the same error with the MTp class where the hash code is making the test fail
-		 */
+	assertEquals(new Snake(L3, new Posn(20,0)), S1.grow());
+	assertEquals(new Snake(new Consp (new Posn(21, 22), L3), new Posn(0,20)), S3.grow());
 
 	}
 	
 	@Test
 	void testmove() {
-		
-		//assertEquals(new Snake(new Consp(new Posn(20, 0), (new Consp(new Posn(0, 0), new Consp(new Posn(0, 1), new MTp())))), new Posn(20,0)),new Snake(new Consp(new Posn(0, 0), new Consp(new Posn(0, 1), new MTp())), new Posn(20,0)).grow());
-			/*
-			 * We are getting the same error with the MTp class where the hash code is making the test fail
-			 */
-
-		
+	
+		assertEquals( new Snake(new Consp (new Posn(1, 2), new MTp()), new Posn(20,0)), S1.move());
+	
 	}
 	
 	
